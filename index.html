@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Multi-step form</title>
+  <style>
+    @font-face {
+      font-family: 'ubuntu-regular';
+      src: url('./assets/fonts/Ubuntu-Regular.ttf');
+    }
+
+    @font-face {
+      font-family: 'ubuntu-bold';
+      src: url('./assets/fonts/Ubuntu-Bold.ttf');
+    }
+
+    @font-face {
+      font-family: 'ubuntu-medium';
+      src: url('./assets/fonts/Ubuntu-Medium.ttf');
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      transition: all 0.3s ease-in-out;
+
+    }
+
+    html,
+    body {
+      width: 100vw;
+      height: 100vh;
+      font-family: 'ubuntu-regular', sans-serif;
+      background-color: rgba(238, 245, 255, 255);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 60vw;
+      height: 75vh;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
+      padding: 1.5%;
+    }
+
+    .side-bar {
+      width: 20vw;
+      height: calc(100vh - 45%);
+      background-image: url('./assets/images/bg-sidebar-desktop.svg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 10px;
+      padding: 40px;
+      color: white;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .step-c {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 20px;
+      font-family: 'ubuntu-medium', sans-serif;
+      font-size: 16px;
+    }
+
+    .step-t p {
+      color: hsl(228, 100%, 84%);
+    }
+
+    .step-t h4 {
+      letter-spacing: 3px;
+      font-size: 16px;
+    }
+
+    .st-active {
+      background-color: hsl(206, 94%, 87%)!important;
+      color: rgb(0, 0, 0);
+    }
+
+    .main {
+      width: inherit;
+      height: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+    }
+
+    .step-cc {
+      display: flex;
+      flex-direction: column;
+      margin-top: 15%;
+      margin-left: 80px;
+
+    }
+
+    .step-cc h2 {
+      font-family: 'ubuntu-bold', sans-serif;
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: hsl(213, 96%, 18%);
+    }
+
+    .step-cc p {
+      font-family: 'ubuntu-regular', sans-serif;
+      font-size: 16px;
+      color: hsl(231, 11%, 63%);
+      margin-bottom: 10%;
+    }
+
+    label {
+      color: hsl(213, 96%, 18%);
+      padding: 5px;
+      padding-left: 0;
+      font-size: 14px;
+    }
+
+    .step-cc input {
+      width: 80%;
+      height: 30px;
+      border-radius: 7px;
+      border: 1px solid hsl(0, 0%, 79%);
+      padding: 10px;
+      padding-left: 15px;
+      margin-bottom: 20px;
+      font-family: 'ubuntu-medium', sans-serif;
+      font-size: 16px;
+      color: hsl(213, 96%, 18%);
+    }
+
+    .step-cc input:focus {
+      outline: none;
+      border: 1px solid hsl(213, 96%, 18%);
+    }
+
+    .step-cc input::placeholder {
+      font-family: 'ubuntu-medium', sans-serif;
+      color: #9b9b9b;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 95% ;
+      margin-left: 4%;
+      position: relative;
+    }
+
+    .ns {
+      width: 150px;
+      height: 50px;
+      border-radius: 10px;
+      background-color: hsl(213, 96%, 18%);
+      color: white;
+      font-family: 'ubuntu-medium', sans-serif;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+    }
+
+    .ns:hover {
+      background-color: hsl(213, 96%, 28%);
+    }
+
+    .gb {
+      width: 150px;
+      height: 50px;
+      border-radius: 10px;
+      background-color: hsla(0, 0%, 100%, 0);
+      color: hsl(0, 0%, 67%);
+      font-family: 'ubuntu-medium', sans-serif;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .gb:hover {
+      color: hsl(213, 96%, 18%);
+    }
+
+    .plans {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 85%;
+    }
+
+    .plan {
+      width: 26%;
+      min-height: 150px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 1px solid hsl(0, 0%, 80%);
+      padding: 10px;
+      font-size: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .plant-c {
+      display: flex;
+      flex-direction: column;
+      margin-left: 5px;
+    }
+
+    .plant-c p {
+      margin-top: 5%;
+      margin-bottom: 0px;
+    }
+    .p-pr{
+      font-size: 15px!important;
+    }
+    .tmf{
+      font-size: 12px!important;
+      margin-top: 5px!important;
+      color: hsl(213, 96%, 18%)!important;
+    }
+
+    .plant-c h3,
+    .add h3 {
+      color: hsl(213, 96%, 18%);
+      font-size: 16px;
+    }
+
+    .plan img {
+      margin: 5px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 10px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: hsl(213, 96%, 18%);
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 13px;
+      width: 13px;
+      left: 3.5px;
+      bottom: 3.5px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+
+    .switch input:checked+.slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+    .p-mode {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: 80%;
+      margin-top: 50px;
+      background-color: hsl(217, 100%, 97%);
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .p-mode p {
+      margin-bottom: 0;
+      color: hsl(231, 11%, 63%);
+      font-family: 'ubuntu-bold', sans-serif;
+    }
+
+    .plan:hover {
+      border-color:hsl(213, 96%, 18%);
+    }
+
+    .p-s{
+      background-color: hsl(217, 100%, 97%);
+      border-color: hsl(213, 96%, 18%);
+    }
+
+    .p-c {
+      color: hsl(213, 96%, 18%) !important;
+    }
+
+    .adds {
+      display: flex;
+      flex-direction: column;
+      width: 85%;
+    }
+
+    .add {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 20px;
+      border: 1px solid hsl(0, 0%, 80%);
+      border-radius: 10px;
+      padding: 20px;
+      cursor: pointer;
+    }
+
+    .add p {
+      margin-bottom: 0;
+      margin-top: 5px;
+    }
+
+    .add-c {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .add:hover {
+      border-color: hsl(213, 96%, 18%);
+    }
+
+    .ad-s{
+      background-color: hsl(217, 100%, 97%);
+      border-color: hsl(213, 96%, 18%);
+    }
+
+    input[type=checkbox] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      margin: auto;
+      margin-right: 20px;
+      border: 1px solid hsl(0, 0%, 80%);
+      outline: none;
+      border-radius: 5px;
+      pointer-events: none;
+    }
+
+    input[type=checkbox]:checked {
+      appearance: none;
+      background-color: hsl(243, 100%, 62%);
+      border: none;
+    }
+
+    input[type=checkbox]:checked+img {
+      display: block;
+    }
+
+    .chbox {
+      position: relative;
+    }
+
+    .chbox img {
+      width: 12px;
+      height: 12px;
+      top: 5px;
+      left: 4px;
+      position: absolute;
+      display: none;
+      pointer-events: none;
+    }
+
+    .cf {
+      width: 150px;
+      height: 50px;
+      border-radius: 10px;
+      background-color: hsl(243, 100%, 62%);
+      color: white;
+      font-family: 'ubuntu-medium', sans-serif;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cf:hover {
+      background-color: hsl(243, 100%, 72%);
+    }
+
+    .recipt {
+      background-color: hsl(217, 100%, 97%);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      align-items: center;
+      justify-content: center;
+      width: 80%;
+    }
+
+    .r-plan {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .r-plan p {
+      margin: 0;
+    }
+
+    .recipt h4 {
+      color: hsl(213, 96%, 18%);
+      font-size: 16px;
+
+    }
+
+    .addons h5 {
+      color: hsl(213, 96%, 18%);
+      font-family: 'ubuntu-regular', sans-serif;
+
+    }
+
+    .addons {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .add-r {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .add-r p {
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .a-link {
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: underline;
+      margin-top: 7px !important;
+      text-decoration-thickness: 2px;
+    }
+    .a-link:hover{
+      text-decoration: none;
+    }
+
+    .hl {
+      width: 100%;
+      height: 0.5px;
+      background-color: hsl(0, 0%, 86%);
+      margin: 20px 0;
+    }
+
+    .f-r {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 80%;
+      margin: 20px;
+    }
+
+    .f-r h4 {
+      color: hsl(243, 100%, 62%);
+      font-size: 20px;
+      font-family: 'ubuntu-bold', sans-serif;
+    }
+    .tq{
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: inherit;
+    }
+    .tq p{
+      width: 85%;
+    }
+    .hidden{
+      display: none;
+    }
+    .lbl{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 82%;
+    }
+    .validate{
+      margin-bottom: 0!important;
+      color: hsl(354, 84%, 57%)!important;
+      font-family: 'ubuntu-regular', sans-serif!important;
+      font-weight: 600;
+      font-size: 15px!important;
+    }
+    .i-e{
+      border-color: hsl(354, 84%, 57%)!important;
+    }
+    .add-p p{
+      color: hsl(243, 100%, 62%)!important;
+    }
+    @media only screen and (max-width:750px){
+      .container{
+        all:initial;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center ;
+        position: relative;
+      }
+      .side-bar{
+        all:initial;
+        width:100vw;
+        background: url('./assets/images/bg-sidebar-mobile.svg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: flex;
+        flex-direction: row;
+        color:white;
+        justify-content: center ;
+        align-items: flex-start;
+        padding-top: 0px;
+        height: 25vh;
+        
+      }
+      .step-c{
+        
+        background-color: transparent;
+        border: 1px solid white;
+        margin-top: 0;
+      }
+      
+      .step-t{
+        display: none;
+      }
+      .main{
+        background-color: white;
+        width:90vw;
+        font-family: 'ubuntu-regular', sans-serif;
+        
+        height: auto;
+        padding: 10px;
+        padding-top: 30px;
+        margin-top:-10vh;
+        border-radius: 10px;
+      }
+      
+      .step-cc{
+        margin: 10px;
+      }
+      
+      label{
+        font-family: 'ubuntu-regular', sans-serif;
+        font-weight: 600;
+      }
+
+      .actions{
+        all:none;
+        display: flex;
+        position:absolute;
+        bottom: 0%;
+        background-color: white ;
+        width:95%;
+        padding: 10px;
+        justify-content: space-between;
+        height:7vh ;
+        margin: 0;
+        left: 0;
+      }
+      
+      .ns{
+        position: absolute ;
+        right:10px;
+      }
+      .plans{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      
+      }
+      .plan{
+        min-height: auto;
+        width: 100%;
+        flex-direction: row;
+        justify-content:flex-start;
+        align-items: center;
+        margin: 10px;
+      }
+      .p-mode{
+        align-self: center;
+      }
+      .add-c p{
+        font-size: 13px;
+      }
+    }
+  </style>
+
+  <script src="./assets/script/main.js" async></script>
+
+</head>
+
+<body>
+
+  <section class="container">
+
+    <!-- Sidebar start -->
+    <section class="side-bar">
+      <section class="step">
+        <section id="sc-1" class="step-c st-active">
+          1
+        </section>
+        <section class="step-t">
+          <p>STEP 1</p>
+          <h4>YOUR INFO</h4>
+        </section>
+      </section>
+
+      <section class="step">
+        <section id="sc-2" class="step-c">
+          2
+        </section>
+        <section class="step-t">
+          <p>STEP 2</p>
+          <h4>SELECT PLAN</h4>
+        </section>
+      </section>
+
+      <section class="step">
+        <section id="sc-3" class="step-c">
+          3
+        </section>
+        <section class="step-t">
+          <p>STEP 3</p>
+          <h4>ADD-ONS</h4>
+        </section>
+      </section>
+
+      <section class="step">
+        <section id="sc-4" class="step-c">
+          4
+        </section>
+        <section class="step-t">
+          <p>STEP 4</p>
+          <h4>SUMMARY</h4>
+        </section>
+      </section>
+
+    </section>
+    <!-- Sidebar end -->
+
+    <section class="main">
+      <!-- Step 1 start -->
+      <section id="stpc-1" class="step-cc">
+        <h2>Personal info</h2>
+        <p>Please provide your name, email address, and phone number.</p>
+        <section class="lbl"><label for="name">Name</label> <p id="name-e" class="validate"></p></section>
+        <input type="text" id="name" name="name" placeholder="e.g. Stephen King">
+        <section class="lbl"><label for="email">Email Address</label> <p id="email-e" class="validate"></p></section>
+        <input type="email" id="email" name="email" placeholder="e.g. stephenking@lorem.com">
+        <section class="lbl"><label for="phone">Phone Number</label> <p id="phone-e" class="validate"></p></section>
+        <input type="tel" id="phone" name="phone" placeholder="e.g. +1 234 567 890">
+      </section>
+      <!-- Step 1 end -->
+
+      <!-- Step 2 start -->
+      <section id="stpc-2" class="step-cc hidden">
+        <h2>Select your plan</h2>
+        <p>You have the option of monthly or yearly billing.</p>
+        <section class="plans">
+          <section onclick="sel_pln(1)" id="pln-1" class="plan p-s">
+            <img width="40" src="./assets/images/icon-arcade.svg">
+            <section class="plant-c">
+              <h3>Arcade</h3>
+              <p class="p-pr">$9/mo</p>
+              <p class="tmf hidden">2 months free</p>
+            </section>
+          </section>
+          <section onclick="sel_pln(2)" id="pln-2" class="plan">
+            <img width="40" src="./assets/images/icon-advanced.svg">
+            <section class="plant-c">
+              <h3>Advanced</h3>
+              <p class="p-pr">$12/mo</p>
+              <p class="tmf hidden">2 months free</p>
+            </section>
+          </section>
+          <section onclick="sel_pln(3)" id="pln-3" class="plan">
+            <img width="40" src="./assets/images/icon-pro.svg">
+            <section class="plant-c">
+              <h3>Pro</h3>
+              <p class="p-pr">$15/mo</p>
+              <p class="tmf hidden">2 months free</p>
+            </section>
+          </section>
+        </section>
+        <section class="p-mode">
+          <p id="mm" class="p-c">Monthly</p>
+          <label style="margin-left: 30px;" class="switch">
+            <input onchange="s_my(this.checked)" type="checkbox">
+            <span class="slider round"></span>
+          </label>
+          <p id="my" style="margin-left: 30px;">Yearly</p>
+        </section>
+      </section>
+      <!-- Step 2 end -->
+
+      <!-- Step 3 start -->
+      <section id="stpc-3" class="step-cc hidden">
+
+        <h2>Pick Add-ons</h2>
+        <p>Add-ons help enhance your gaming experience.</p>
+        <section class="adds">
+          <section onclick="s_ad(1)" id="ad-1" class="add">
+            <section class="add-c">
+              <section class="chbox">
+                <input type="checkbox">
+                <img src="./assets/images/icon-checkmark.svg">
+              </section>
+              <section>
+                <h3>Online service</h3>
+                <p>Access to multiplayer games</p>
+              </section>
+            </section>
+            <section class="add-p">
+              <p class="apr">+$1/mo</p>
+            </section>
+          </section>
+
+          <section onclick="s_ad(2)" id="ad-2" class="add">
+            <section class="add-c">
+              <section class="chbox">
+                <input type="checkbox">
+                <img src="./assets/images/icon-checkmark.svg">
+              </section>
+              <section>
+                <h3>Larger storage</h3>
+                <p>Extra 1TB of cloud save</p>
+              </section>
+            </section>
+            <section class="add-p">
+              <p class="apr">+$2/mo</p>
+            </section>
+          </section>
+
+          <section onclick="s_ad(3)" id="ad-3" class="add">
+            <section class="add-c">
+              <section class="chbox">
+                <input type="checkbox">
+                <img src="./assets/images/icon-checkmark.svg">
+              </section>
+              <section>
+                <h3>Customizable Profile</h3>
+                <p>Custom theme on your profile</p>
+              </section>
+            </section>
+            <section class="add-p">
+              <p class="apr">+$2/mo</p>
+            </section>
+          </section>
+        </section>
+      </section>
+      <!-- Step 3 end -->
+
+      <!-- Step 4 start -->
+
+      <section id="stpc-4" class="step-cc hidden">
+        <h2>Finishing Up</h2>
+        <p>Double-check everything looks OK before confirming.</p>
+        <section class="recipt">
+          <section class="r-plan">
+            <section>
+              <h4 id="pl-pp">Arcade(Monthly)</h4>
+              <p onclick="change()" class="a-link">Change</p>
+            </section>
+            <section>
+              <h4 id="pl-pz" class="r-pr">$9/mo</h4>
+            </section>
+          </section>
+
+          <section class="hl"></section>
+
+          <section class="addons">
+
+            <section id="fi-1" class="add-r hidden">
+              <p>Online service</p>
+              <h5 class="rpr">+$1/mo</h5>
+            </section>
+            <section id="fi-2" class="add-r hidden">
+              <p>Larger torage</p>
+              <h5 class="rpr">+$2/mo</h5>
+            </section> 
+            <section id="fi-3" class="add-r hidden">
+              <p>Customizable Profile</p>
+              <h5 class="rpr">+$2/mo</h5>
+            </section>
+
+          </section>
+
+        </section>
+        <section class="f-r">
+          <p id="f-tpp">Total (per month)</p>
+          <h4 id="f-tpz">+$12/mo</h4>
+        </section>
+      </section>
+
+      <!-- Step 4 end -->
+
+      <!-- Step 5 start -->
+
+      <section id="stpc-5" class="step-cc tq hidden">
+        <img style="margin-bottom: 30px;" src="./assets/images/icon-thank-you.svg">
+        <h2>Thank you!</h2>
+        <p>Thanks for confirming your subscription! We hope you have fun
+          using our platform. If you ever need support, please feel free
+          to email us at support@loremgaming.com.</p>
+      </section>
+
+      <!-- Step 5 end -->
+
+
+        <section id="acc" class="actions">
+          <button id="gb-bt"  onclick="back_s()"class="gb hidden">Go Back</button>
+          <button id="ns-bt" style="align-self: flex-end;" class="ns" onclick="next_s()">Next Step</button>
+          <button id="cf-bt" onclick="tq_s()" class="cf hidden">Confirm</button>
+        </section>
+
+      </section>
+
+    </section>
+</body>
+
+</html>
