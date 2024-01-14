@@ -2,7 +2,7 @@ let cs = 1, cp = 1, ca = [], my = false;
 
 let cpz ={true:[9,12,15],false:[90,120,150]},apz={true:[1,2,2],false:[10,20,20]};
 
-let cfs = { 1: 'validate()', 2: 'true', 3: 'true', 4: 'true' }, pld = { true: ['$90/yr', '$120/yr', '$150/yr'], false: ['$9/mo', '$12/mo', '$15/mo'] }, apd = { true: ['+$10/yr', '+$20/yr', '+$20/yr'], false: ['+$1/mo', '+$2/mo', '+$2/mo'] };
+let cfs = { 1: 'validate_input()', 2: 'true', 3: 'true', 4: 'true' }, pld = { true: ['$90/yr', '$120/yr', '$150/yr'], false: ['$9/mo', '$12/mo', '$15/mo'] }, apd = { true: ['+$10/yr', '+$20/yr', '+$20/yr'], false: ['+$1/mo', '+$2/mo', '+$2/mo'] };
 
 let pls = {1:'Arcade',2:'Advanced',3:'Pro'},mpm={true:'Yearly',false:'Monthly'},
 plpz ={false:[9,12,15],true:[90,120,150]},aprz={false:[1,2,2],true:[10,20,20]};
